@@ -16,8 +16,10 @@ const createServer = (client) => {
         verify(token, SECRETS.JWT_SECRET);
         next();
       } catch (err) {
-        return;
+        return res.json({ err: 'Invalid token', message: null });
       }
+    } else {
+      return res.json({ err: 'Token not found', message: null });
     }
     next();
   };
